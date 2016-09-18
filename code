@@ -1,0 +1,69 @@
+#include <iostream>
+#include <cstdio>
+#include <algorithm>
+#include <cmath>
+#include <string>
+#include <vector>
+#include <set>
+#include <map>
+
+using namespace std;
+
+int main(int argc, const char *argv[])
+{
+
+    freopen("a.in", "r", stdin);
+    freopen("a.out", "w+", stdout);
+
+    int type, total = 0;
+    map<int, int> m;
+    map<int, int> m2;
+    while (cin>>type)
+    {
+        int startDay, endDay, grow1;
+        int day, grow2;
+
+        if (type == 1)
+        {
+            cin >> startDay >> endDay >> grow1;
+
+            for (int i = startDay; i <= endDay; i++)
+            {
+                if (m.count(i) == 0)
+                {
+                    total += grow1;
+                    m[i] = grow1;
+                }
+                else
+                {
+                    if (m[i] < grow1)
+                    {
+                        total += (grow1 - m[i]);
+                        m[i] = grow1;
+                    }
+                }
+            }
+        }
+        else if (type == 2)
+        {
+            cin >> day >> grow2;
+            if (m2.count(day) == 0)
+            {
+                total += grow2;
+                m2[day] = grow2;
+            }
+            else
+            {
+                if (m2[day] < grow2)
+                {
+                    total += (grow2 - m2[day]);
+                    m2[day] = grow2;
+                }
+            }
+        }
+    }
+
+    cout << total << endl;
+
+    return 0;
+}
